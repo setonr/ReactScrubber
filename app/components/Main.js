@@ -1,6 +1,6 @@
 var React = require("react");
 
-var Header = React.createClass({
+var Main = React.createClass({
   render: function() {
     return (
       <nav class="navbar navbar-default">
@@ -16,4 +16,4 @@ var Header = React.createClass({
   }
 });
 
-module.exports = Header;
+module.exports = Main;
