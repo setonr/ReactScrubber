@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/setonr/ReactScrubber#readme",
   "dependencies": {
+    "axios": "^0.16.2",
     "cheerio": "^1.0.0-rc.2",
     "mongoose": "^4.11.1",
     "react": "^15.6.1",
