@@ -8,14 +8,15 @@ var helpers = require("./utils/helpers");
 var Main = React.createClass({
 
   getInitialState: function() {
-    return { topic: "", startDate: "", endDate: "", results: "" };
+  {/*TODO: add saved*/}
+    return { searchTerm: "", results : "" };
   },
 
   componentDidUpdate: function(prevProps, prevState) {
-    if(prevState.topic !== this.state.topic) {
+    if(prevState.searchTerm !== this.state.searchTerm) {
       console.log("UPDATED");
 
-      helpers.runQuery(this.state.topic).then(function(data) {
+      helpers.runQuery(this.state.searchTerm).then(function(data) {
         if (data !== this.state.results) {
           console.log(data);
           this.setState({ results: data });
@@ -24,13 +25,14 @@ var Main = React.createClass({
     }
   },
 
-  setTerms: function(topic, startDate, endDate) {
-    this.setState({ topic: topic }, { startDate: startDate }, { endDate: endDate });
+  setTerms: function(term) {
+    this.setState({ searchTerm: term });
   },
 
   render: function() {
     return (
       <div className="main-container">
+
         <nav className="navbar navbar-default">
           <div className="container-fluid">
             <div className="navbar-header">
@@ -39,13 +41,18 @@ var Main = React.createClass({
           </div>
         </nav>
 
-        <div className="searchBox">
-          <Search setSearch={this.setSearch} />
+        <div className="row">
+          <div className="col-sm-12 searchBox">
+            <Search setTerms={this.setTerms} />
+          </div>
         </div>
 
-        <div className="savedBox">
-          <Saved savedArea={this.state.saved} />
+        <div className="row">
+          <div className="col-sm-12 savedBox">
+            <Saved savedArea={this.state.saved} />
+          </div>
         </div>
+
     </div>
     );
   }

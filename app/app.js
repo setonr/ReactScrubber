@@ -1,9 +1,9 @@
 var React = require("react");
 var ReactDOM = require("react-dom");
 
-var Header = require("./components/Main");
-var Search = require("./components/Search");
-var Saved = require("./components/Saved");
+var Main = require("./components/Main");
+var Search = require("./components/children/Search");
+var Saved = require("./components/children/Saved");
 
 ReactDOM.render(
   <div className="main-container">

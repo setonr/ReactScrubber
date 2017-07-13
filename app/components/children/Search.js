@@ -2,11 +2,11 @@ var React = require("react");
 
 var Search = React.createClass({
   getInitalState: function() {
-    return { topic: "", startDate: "", endDate: ""};
+    return { term: "" };
   },
 
   handleChange: function(event) {
-    var newState ={};
+    var newState = {};
     newState[event.target.id] = event.target.value;
     this.setState(newState);
   },
@@ -14,43 +14,48 @@ var Search = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
 
-    this.props.setSearch(this.state.topic);
-    this.props.setSearch(this.state.startDate);
-    this.props.setSearch(this.state.endDate);
+    this.props.setTerms(this.state.term);
 
-    this.setState({topic: ""}, {startDate: ""}, {endDate: ""});
+    this.setState({ term: "" });
   },
 
   render: function() {
     return (
       
-      <div id="searchForm">
+      <div className="panel panel-default">
+        <div className="panel-heading">
+          <h3 className="panel-title text-center">Search for Articles</h3>
+        </div>
+        <div className="panel-body text-center">
 
-        <form onSubmit={this.handleSubmit}>
-          <div class="form-group row">
-            <label for="topic" class="col-2 col-form-label">Topic</label>
-            <div class="col-10">
-              <input class="form-control" type="text" value={this.state.topic} id="topic" onChange={this.handleChange}></input>
+          <form onSubmit={this.handleSubmit}>
+            <div className="form-group">
+              <h4 className="">
+                <strong>Topic</strong>
+              </h4>
+
+              {/*
+                TODO: need to add start and end date options
+             
+              <input
+                type="text"
+                value={this.state.term}
+                className="form-control text-center"
+                id="term"
+                onChange={this.handleChange}
+                required
+              />
+               */}
+              <br />
+              <button
+                className="btn btn-primary"
+                type="submit"
+              >
+                Submit
+              </button>
             </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="startYear" class="col-2 col-form-label">Start Year</label>
-            <div class="col-10">
-              <input class="form-control" type="text" value={this.state.startYear} id="startYear" onChange={this.handleChange}></input>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label for="endYear" class="col-2 col-form-label">End Year</label>
-            <div class="col-10">
-              <input class="form-control" type="text" value={this.state.endYear} id="endYear" onChange={this.handleChange}></input>
-            </div>
-          </div>
-
-          <button class="btn btn-primary searchBtn" type="submit">Search</button>
-        </form>
-
+          </form>
+        </div>
       </div>
     )
   }
