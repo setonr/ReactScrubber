@@ -2,11 +2,14 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var webpack = require("webpack");
+
 var Article = require("./models/Article");
+
 var app = express();
 var PORT = process.env.PORT || 3000;
+
 app.use(logger("dev"));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -37,7 +40,7 @@ app.get("/", function(req, res) {
 
 //Find all saved articles
 app.get("/api/saved", function(req, res) {
-	Article.find({}).sort([["date", "descending"]
+	Article.find({}).sort([["date", "ascending"]
 		]).exec(function(err, doc) {
 			if (err) {
 				console.log(err);
@@ -66,4 +69,4 @@ app.post("/api/saved", function(req, res) {
 
 app.listen(PORT, function() {
 	console.log("App listening on PORT: " + PORT);
-})
+});
