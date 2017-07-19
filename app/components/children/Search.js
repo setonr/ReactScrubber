@@ -2,7 +2,7 @@ var React = require("react");
 
 var Search = React.createClass({
   getInitalState: function() {
-    return { term: "" };
+    return { searchTerm: "", startYear: "", endYear: "" };
   },
 
   handleChange: function(event) {
@@ -14,9 +14,14 @@ var Search = React.createClass({
   handleSubmit: function(event) {
     event.preventDefault();
 
-    this.props.setTerms(this.state.term);
-
-    this.setState({ term: "" });
+    if (this.state.searchTerm) {
+      this.props.setSearchState(this.state.searchTerm, this.state.startYear, this.state.endYear);
+    }
+      this.setState({
+        searchTerm: "",
+        startYear: "",
+        endYear: ""
+      })
   },
 
   render: function() {
@@ -30,31 +35,26 @@ var Search = React.createClass({
 
           <form onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <h4 className="">
-                <strong>Topic</strong>
-              </h4>
-
-              {/*
-                TODO: need to add start and end date options
-             
-              <input
-                type="text"
-                value={this.state.term}
-                className="form-control text-center"
-                id="term"
-                onChange={this.handleChange}
-                required
-              />
-               */}
-              <br />
-              <button
-                className="btn btn-primary"
-                type="submit"
-              >
-                Submit
-              </button>
+              <div className="row">
+                <div className="input-field offset-s2 col s2 ">
+                    <i className="tiny material-icons prefix">search</i>
+                    <input  value={this.state.searchTerm} onChange={this.handleChange} placeholder="" id="searchTerm" type="text" className="validate"/>  
+                  </div>
+                  <div className="input-field col s2">
+                      <i className="tiny material-icons prefix">date_range</i>
+                      <input value={this.state.startYear} onChange={this.handleChange} placeholder="" id="beginYear" type="number" className="validate"/> 
+                  </div>
+                  <div className="input-field col s2">
+                      <i className="tiny material-icons prefix">date_range</i>
+                      <input value={this.state.endYear} onChange={this.handleChange} placeholder="" id="endYear" type="number" className="validate"/> 
+                  </div>
+                  <div className="input-field col s2">
+                      <button onSubmit={this.handleSubmit} type="submit" className="btn" id="submit">Submit</button> 
+                  </div>
+              </div>
             </div>
           </form>
+          <div className="results"></div>
         </div>
       </div>
     )

@@ -23254,20 +23254,7 @@ var Main = React.createClass({
       React.createElement(
         "div",
         { className: "row" },
-        React.createElement(
-          "div",
-          { className: "col-sm-12 searchBox" },
-          React.createElement(Search, { setTerms: this.setTerms })
-        )
-      ),
-      React.createElement(
-        "div",
-        { className: "row" },
-        React.createElement(
-          "div",
-          { className: "col-sm-12 savedBox" },
-          React.createElement(Saved, { savedArea: this.state.saved })
-        )
+        this.props.children
       )
     );
   }

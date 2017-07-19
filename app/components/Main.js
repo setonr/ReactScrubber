@@ -1,35 +1,26 @@
 var React = require("react");
-
 var Search = require("./children/Search");
 var Saved = require("./children/Saved");
-
 var helpers = require("./utils/helpers");
 
 var Main = React.createClass({
 
   getInitialState: function() {
-  {/*TODO: add saved*/}
-    return { searchTerm: "", results : "" };
-  },
 
-  componentDidUpdate: function(prevProps, prevState) {
-    if(prevState.searchTerm !== this.state.searchTerm) {
-      console.log("UPDATED");
+    return { searchTerm: "", startYear: "", endYear: "", firstSearch: true };
+    },
 
-      helpers.runQuery(this.state.searchTerm).then(function(data) {
-        if (data !== this.state.results) {
-          console.log(data);
-          this.setState({ results: data });
-        }
-      }.bind(this));
-    }
-  },
-
-  setTerms: function(term) {
-    this.setState({ searchTerm: term });
-  },
+    setSearchState: function (newSearchTerm, newStartYear, newEndYear) {
+      this.setState ({
+        searchTerm: newSearchTerm,
+        startYear: newStartYear,
+        endYear: newEndYear,
+        firstSearch: false
+      })
+    },
 
   render: function() {
+    
     return (
       <div className="main-container">
 
@@ -42,15 +33,7 @@ var Main = React.createClass({
         </nav>
 
         <div className="row">
-          <div className="col-sm-12 searchBox">
-            <Search setTerms={this.setTerms} />
-          </div>
-        </div>
-
-        <div className="row">
-          <div className="col-sm-12 savedBox">
-            <Saved savedArea={this.state.saved} />
-          </div>
+          {this.props.children}
         </div>
 
     </div>
